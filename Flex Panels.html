@@ -1,0 +1,172 @@
+# Flex-Panels
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Flex Panels</title>
+  </head>
+  <style>
+    html {
+      box-sizing: border-box;
+      background: #ffc600;
+      font-family: "Helvetica Neue";
+      font-size: 20px;
+      font-weight: 200;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    *,
+    *:before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    .panels {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+
+    .panel {
+      background: #6b0f9c;
+      box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
+      color: rgb(231, 211, 180);
+      text-align: center;
+      align-items: center;
+      transition: flex 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11),
+        font-size 0.7s cubic-bezier(0.61, -0.19, 0.7, -0.11), background 0.2s;
+      font-size: 20px;
+      background-size: cover;
+      background-position: center;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .panel1 {
+      background-image: url(file:///C:/Users/CJ/Downloads/venti.jpg);
+    }
+    .panel2 {
+      background-image: url(file:///C:/Users/CJ/Downloads/zhongli.jpg);
+    }
+    .panel3 {
+      background-image: url(file:///C:/Users/CJ/Downloads/raiden.jpg);
+    }
+    .panel4 {
+      background-image: url(file:///C:/Users/CJ/Downloads/nahida.jpg);
+    }
+    .panel5 {
+      background-image: url(file:///C:/Users/CJ/Downloads/furina.jpg);
+    }
+
+    /*Flex Items */
+
+    .panel > * {
+      margin: 0;
+      width: 100%;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(20%);
+    }
+    /* The first <p> transitions immediately when panel is active */
+    .panel.open-active > *:first-child {
+      opacity: 1;
+      transform: translateY(10);
+      text-transform: uppercase;
+      font-family: "Amatic SC", cursive;
+      font-size: 16em;
+      font-style: italic;
+    }
+    /* The second <p> has a delayed transition */
+    .panel.open-active > *:nth-child(2) {
+      transition-delay: 0.3s; /* Adjust the delay as needed */
+      opacity: 1;
+      transform: translateY(5);
+      font-size: 8em;
+    }
+
+    .panel p {
+      text-shadow: 0 0 4px rgba(0, 0, 0.72), 0 0 14px rgba(0, 0, 0.45);
+    }
+
+    .panel.open {
+      flex: 5;
+      font-size: 10px;
+    }
+  </style>
+
+  <body>
+    <div class="panels">
+      <div class="panel panel1">
+        <p>
+          "Fly, fly away, Like a bird in the sky. See the world on my behalf, To
+          the heavens may you fly."
+        </p>
+        <p>- Venti</p>
+      </div>
+
+      <div class="panel panel2">
+        <p>
+          "Those who come to witness, will witness. Those who come to remember,
+          will remember."
+        </p>
+
+        <p>- Zhongli</p>
+      </div>
+
+      <div class="panel panel3">
+        <p>
+          "There are only two kinds of things — those that must be done and
+          those that must not."
+        </p>
+        <p>- Raiden Shogun</p>
+      </div>
+
+      <div class="panel panel4">
+        <p>
+          "You have to see the world for yourself to appreciate how beautiful it
+          is."
+        </p>
+        <p>- Nahida</p>
+      </div>
+
+      <div class="panel panel5">
+        <p>
+          "Before you start a war, you better know what you're fighting for.
+        </p>
+        <p>- Furina</p>
+      </div>
+    </div>
+
+    <script>
+      const panels = document.querySelectorAll(".panel");
+
+      function toggleOpen() {
+        console.log("Hello");
+        this.classList.toggle("open");
+      }
+
+      function toggleActive(e) {
+        console.log(e.propertyName);
+        if (e.propertyName.includes("flex-grow")) {
+          this.classList.toggle("open-active");
+        }
+      }
+
+      panels.forEach((panel) => panel.addEventListener("click", toggleOpen));
+      panels.forEach((panel) =>
+        panel.addEventListener("transitionend", toggleActive)
+      );
+    </script>
+  </body>
+</html>
